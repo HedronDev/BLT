@@ -39,8 +39,11 @@ class BltDeploy extends BaseParser {
         $commandStack->addCommand("cd $blt_dir");
         $commandStack->addCommand("composer create-project --no-interaction acquia/blt .");
       }
-      $commandStack->addCommand("cd {$this->getDataDirectoryPath()}");
-      $commandStack->addCommand("composer create-project --no-interaction acquia/blt-project .");
+
+      if (!$this->getFileSystem()->exists($this->getDataDirectoryPath() . DIRECTORY_SEPARATOR . 'docroot')) {
+        $commandStack->addCommand("cd {$this->getDataDirectoryPath()}");
+        $commandStack->addCommand("composer create-project --no-interaction acquia/blt-project .");
+      }
       $commandStack->addCommand("./$blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
       $commandStack->execute();
     }
