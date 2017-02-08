@@ -16,7 +16,8 @@
         }
     },
     "require": {
-        "hedron/hedron": "^0.2"
+        "hedron/hedron": "^0.2",
+        "acquia/blt": "^8.6"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.4"

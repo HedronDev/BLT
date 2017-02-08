@@ -30,8 +30,12 @@ class BltDeploy extends BaseParser {
       }
     }
     if ($parse) {
-      $commandStack->addCommand("cd {$applicationDir}");
-      $commandStack->addCommand("blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
+      $user_directory = trim(shell_exec("cd ~; pwd"));
+      $hedron_directory = $user_directory . DIRECTORY_SEPARATOR . '.hedron';
+      $blt = $hedron_directory . DIRECTORY_SEPARATOR . 'hedron' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'blt';
+      $commandStack->addCommand("cd {$this->getDataDirectoryPath()}");
+      $commandStack->addCommand("composer create-project --no-interaction acquia/blt-project .");
+      $commandStack->addCommand("./$blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
       $commandStack->execute();
     }
   }
