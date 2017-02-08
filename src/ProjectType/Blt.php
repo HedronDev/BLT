@@ -9,8 +9,8 @@ use Hedron\ProjectType\ProjectTypeBase;
 
 /**
  * @ProjectType(
- *   pluginId = "git",
- *   label = "Git"
+ *   pluginId = "blt",
+ *   label = "Acquia BLT"
  * )
  */
 class Blt extends ProjectTypeBase {
