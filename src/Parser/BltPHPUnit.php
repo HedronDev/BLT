@@ -7,10 +7,10 @@ use Hedron\GitPostReceiveHandler;
 
 /**
  * @Hedron\Annotation\Parser(
- *   pluginId = "blt_deploy"
+ *   pluginId = "blt_phpunit"
  * )
  */
-class BltDeploy extends BltBaseParser {
+class BltPHPUnit extends BltBaseParser {
 
   /**
    * {@inheritdoc}
@@ -18,7 +18,7 @@ class BltDeploy extends BltBaseParser {
   public function parse(GitPostReceiveHandler $handler, CommandStackInterface $commandStack) {
     if ($this->doParse($handler)) {
       $commandStack->addCommand("cd {$this->getDataDirectoryPath()}");
-      $commandStack->addCommand("./vendor/bin/blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
+      $commandStack->addCommand("./vendor/bin/phpunit");
       $commandStack->execute();
     }
   }

@@ -24,6 +24,7 @@ class Blt extends ProjectTypeBase {
       'ensure_shared_volumes',
       'blt_create_project',
       'blt_deploy',
+      'blt_phpunit',
       'docker_compose',
       'docker_compose_ps',
     ];
