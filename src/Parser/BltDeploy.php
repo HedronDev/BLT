@@ -30,21 +30,8 @@ class BltDeploy extends BaseParser {
       }
     }
     if ($parse) {
-      $user_directory = trim(shell_exec("cd ~; pwd"));
-      $hedron_directory = $user_directory . DIRECTORY_SEPARATOR . '.hedron';
-      $blt = $hedron_directory . DIRECTORY_SEPARATOR . 'blt' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'blt';
-      if (!$this->getFileSystem()->exists($hedron_directory . DIRECTORY_SEPARATOR . 'blt')) {
-        $blt_dir = $hedron_directory . DIRECTORY_SEPARATOR . 'blt';
-        $commandStack->addCommand("mkdir -p $blt_dir");
-        $commandStack->addCommand("cd $blt_dir");
-        $commandStack->addCommand("composer create-project --no-interaction acquia/blt .");
-      }
-
-      if (!$this->getFileSystem()->exists($this->getDataDirectoryPath() . DIRECTORY_SEPARATOR . 'docroot')) {
-        $commandStack->addCommand("cd {$this->getDataDirectoryPath()}");
-        $commandStack->addCommand("composer create-project --no-interaction acquia/blt-project .");
-      }
-      $commandStack->addCommand("./$blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
+      $blt = $this->getDataDirectoryPath() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'blt';
+      $commandStack->addCommand(".$blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
       $commandStack->execute();
     }
   }

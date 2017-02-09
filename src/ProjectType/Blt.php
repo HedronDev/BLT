@@ -22,6 +22,7 @@ class Blt extends ProjectTypeBase {
     $parsers = [
       'git_pull',
       'ensure_shared_volumes',
+      'blt_create_project',
       'blt_deploy',
       'docker_compose',
       'docker_compose_ps',
