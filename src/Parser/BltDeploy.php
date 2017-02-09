@@ -30,8 +30,9 @@ class BltDeploy extends BaseParser {
       }
     }
     if ($parse) {
-      $blt = $this->getDataDirectoryPath() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'blt';
-      $commandStack->addCommand(".$blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
+      $blt_dir = $this->getDataDirectoryPath() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'bin';
+      $commandStack->addCommand("cd $blt_dir");
+      $commandStack->addCommand("./blt deploy:build -Ddeploy.dir={$this->getDataDirectoryPath()}");
       $commandStack->execute();
     }
   }
